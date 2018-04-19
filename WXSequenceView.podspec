@@ -17,14 +17,14 @@ Pod::Spec.new do |s|
 
   s.name         = "WXSequenceView"
   s.version      = "0.0.1"
-  s.summary      = "WXSequenceView is support to rotate the sequence diagram and automatic playback sequence diagram."
+  s.summary      = "SequenceView"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = "SequenceView"
+  s.description  = "WXSequenceView is support to rotate the sequence diagram and automatic playback sequence diagram."
 
   s.homepage     = "https://github.com/kiss7xin/WXSequenceView"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
