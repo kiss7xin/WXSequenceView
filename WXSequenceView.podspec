@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = "WXSequenceView is support to rotate the sequence diagram and automatic playback sequence diagram."
+  s.description  = "SequenceView"
 
   s.homepage     = "https://github.com/kiss7xin/WXSequenceView"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -90,7 +90,7 @@ Pod::Spec.new do |s|
   #
 
   s.source_files  = "WXSequenceView/WXSequenceView/**/*.{h,m}" #需要托管的源代码路径
-  s.exclude_files = "Classes/Exclude"
+  # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
 
