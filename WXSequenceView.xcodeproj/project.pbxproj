@@ -1101,11 +1101,8 @@
 		226305F82084B6490073C10F /* WXSequenceView */ = {
 			isa = PBXGroup;
 			children = (
+				2286D34A208831A600639973 /* WXSequenceView */,
 				226306122084B8EA0073C10F /* 联排 */,
-				2263060F2084B67E0073C10F /* WXSequenceView.h */,
-				226306102084B67F0073C10F /* WXSequenceView.m */,
-				226308BE208587C20073C10F /* WXSequenceData.h */,
-				226308BF208587C20073C10F /* WXSequenceData.m */,
 				226305F92084B6490073C10F /* AppDelegate.h */,
 				226305FA2084B6490073C10F /* AppDelegate.m */,
 				226305FC2084B6490073C10F /* ViewController.h */,
@@ -1125,6 +1122,17 @@
 				2220D7A6208719C200DB18FA /* 联排 */,
 			);
 			path = "联排";
+			sourceTree = "<group>";
+		};
+		2286D34A208831A600639973 /* WXSequenceView */ = {
+			isa = PBXGroup;
+			children = (
+				2263060F2084B67E0073C10F /* WXSequenceView.h */,
+				226306102084B67F0073C10F /* WXSequenceView.m */,
+				226308BE208587C20073C10F /* WXSequenceData.h */,
+				226308BF208587C20073C10F /* WXSequenceData.m */,
+			);
+			path = WXSequenceView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
