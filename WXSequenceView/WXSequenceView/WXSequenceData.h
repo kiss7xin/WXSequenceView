@@ -30,5 +30,13 @@
  时间间隔 默认0.04,只会在下次开始播放的时候生效，正在播放时不会生效
  */
 @property (nonatomic, assign) NSTimeInterval timeInterval;
+/**
+ 最小缩放值
+ */
+@property (nonatomic, assign) CGFloat minScale;
+/**
+ 最大放大值
+ */
+@property (nonatomic, assign) CGFloat maxScale;
 
 @end

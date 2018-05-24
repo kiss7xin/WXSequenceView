@@ -75,4 +75,9 @@
     }
 }
 
+- (void)doubleTouchScale:(CGFloat)scaleValue
+{
+    NSLog(@"scaleValue=%f",scaleValue);
+}
+
 @end

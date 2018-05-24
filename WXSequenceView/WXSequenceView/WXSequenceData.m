@@ -18,6 +18,8 @@
         _timeInterval = 0.04;
         _currentNumber = 1;
         _totalNumber = 60;
+        _minScale = 0.8;
+        _maxScale = 1.5;
     }
     return self;
 }

@@ -9,6 +9,11 @@
 #import "WXSequenceView.h"
 
 @interface WXSequenceView ()
+{
+    CGFloat scaleValue;
+    CGFloat startValue;
+    NSInteger scaleCurrent;
+}
 
 @property (nonatomic, strong) WXSequenceData *sequenceData;
 /**
@@ -48,6 +53,8 @@
  */
 @property (nonatomic, assign) CGPoint startPoint;
 
+@property (nonatomic, assign) CGFloat distance;
+
 @end
 
 @implementation WXSequenceView
@@ -80,6 +87,9 @@
     _totalNumber = sequenceData.totalNumber;
     _timeInterval = sequenceData.timeInterval;
     [self replaceImage];
+    //初始化放大数字
+    scaleCurrent = 0;
+    [self scaleWithValue:0];
 }
 
 - (void)startAutoPlay {
@@ -111,6 +121,8 @@
 - (void)_setup {
     self.userInteractionEnabled = YES;
     self.contentMode = UIViewContentModeScaleAspectFill;
+    
+    scaleValue = 1;
 }
 
 - (void)timeDidChange:(NSTimer *)timer {
@@ -163,21 +175,63 @@
     }
 }
 
+- (CGFloat)doubleFingerDistanceWithEvent:(UIEvent *)event {
+    NSArray *touchs = [[event allTouches] allObjects];
+    if (touchs.count != 2) {
+        return 0;
+    }
+    CGPoint p1 = [[touchs objectAtIndex:0] locationInView:self];
+    CGPoint p2 = [[touchs objectAtIndex:1] locationInView:self];
+    CGFloat addwidth = fabs(p1.x - p2.x);
+    CGFloat addheight = fabs(p1.y - p2.y);
+    CGFloat distance = sqrt(powf(addwidth, 2) + powf(addheight, 2));
+    return distance;
+}
+
+- (void)scaleWithValue:(CGFloat)value {
+    //缩放控制值 value 值范围 1为标准值
+    if (value > startValue &&scaleValue <= _sequenceData.maxScale) {
+        scaleCurrent++;
+    }else if (value < startValue && scaleValue > _sequenceData.minScale) {
+        scaleCurrent--;
+    }
+    
+    startValue = value;
+    
+    scaleValue = scaleCurrent/100.f + 1;
+    self.transform = CGAffineTransformMakeScale(scaleValue, scaleValue);
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(doubleTouchScale:)]) {
+        [self.delegate doubleTouchScale:scaleValue];
+    }
+}
+
 #pragma mark - touches 方法
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
+    
     // 区别处理双指拖拽
-    if ([event allTouches].count != 1) {
+    if ([event allTouches].count > 2) {
+        return;
+    }else if ([event allTouches].count == 2) {
+        self.distance = [self doubleFingerDistanceWithEvent:event];
         return;
     }
-    [super touchesBegan:touches withEvent:event];
+    
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchLocation = [touch locationInView:self];
     _startPoint = touchLocation;
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesMoved:touches withEvent:event];
     // 区别处理双指拖拽
-    if ([event allTouches].count != 1) {
+    if ([event allTouches].count > 2) {
+        return;
+    }else if ([event allTouches].count == 2) {
+        CGFloat distance = [self doubleFingerDistanceWithEvent:event];
+        CGFloat value = (distance - self.distance);
+        [self scaleWithValue:value];
         return;
     }
     
@@ -211,8 +265,12 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [super touchesEnded:touches withEvent:event];
     // 区别处理双指拖拽
-    if ([event allTouches].count != 1) {
+    if ([event allTouches].count > 2) {
+        return;
+    }else if ([event allTouches].count == 2) {
+        
         return;
     }
     
